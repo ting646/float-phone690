@@ -120,8 +120,10 @@
 
 .phone-shell {
   position: relative;
-  width: var(--phone-screen-width);
-  height: var(--phone-screen-height);
+  width: min(var(--phone-screen-width), 100vw);
+  height: min(var(--phone-screen-height), 100dvh);
+  max-width: 100%;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: var(--phone-screen-radius);
