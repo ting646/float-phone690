@@ -112,20 +112,14 @@ export function applyDeviceCompatibilitySettings(
     root.style.setProperty("--phone-screen-width", Math.round(layoutWidth) + "px");
     root.style.setProperty("--phone-screen-height", Math.round(layoutHeight) + "px");
     root.style.setProperty("--compat-layout-scale", String(scale));
-  } else if (((window.matchMedia("(hover: none) and (pointer: coarse)").matches
-    || (window.matchMedia("(hover: none)").matches && navigator.maxTouchPoints > 0))
-    && Math.min(screenWidth, screenHeight) >= 520
-    && viewportWidth / 390 > 1.05)) {
-    console.warn("[compat] 大屏触屏档生效 viewport=" + viewportWidth + "x" + viewportHeight + " z=" + (viewportWidth / 390).toFixed(3));
-    /* 大屏触屏档（平板/折叠屏展开/大屏手机，短边 >=520）：宽度驱动铺满 ——
-       壳内逻辑宽恒为 390 设计稿等效（--compat-layout-scale = 视口/390），
-       高度按视口拉伸（UI 垂直弹性）。弃 test 线 min() 的等比留白（撑不满），
-       也规避桌面窗口（hover 设备不进此分支）。部分 WebView（模拟器/个别 ROM）
-       pointer:coarse 误报 fine，触摸能力以 maxTouchPoints 兜底。照片墙涂鸦换算已实测壳缩放。 */
-    const z = Math.max(1.05, viewportWidth / 390);
-    root.style.setProperty("--phone-screen-width", Math.round(viewportWidth / z) + "px");
-    root.style.setProperty("--phone-screen-height", Math.round(viewportHeight / z) + "px");
-    root.style.setProperty("--compat-layout-scale", String(z));
+  } else if ((window.matchMedia("(hover: none) and (pointer: coarse)").matches
+    || (window.matchMedia("(hover: none)").matches && navigator.maxTouchPoints > 0)
+    || viewportWidth < 600)) {
+    console.warn("[compat] 移动端窄屏/触屏铺满档生效 viewport=" + viewportWidth + "x" + viewportHeight);
+    /* 移动端全屏铺满：自动将逻辑视口宽度和高度直接对齐真实视口，消除黑边与随意滑动。 */
+    root.style.setProperty("--phone-screen-width", viewportWidth + "px");
+    root.style.setProperty("--phone-screen-height", viewportHeight + "px");
+    root.style.setProperty("--compat-layout-scale", "1");
   } else if (Math.abs(userScale - 1) > 0.001) {
     root.style.setProperty("--phone-screen-width", Math.round(viewportWidth / userScale) + "px");
     root.style.setProperty("--phone-screen-height", Math.round(viewportHeight / userScale) + "px");
