@@ -3,136 +3,190 @@
 .phone-shell-wrap {
   --phone-total-width: calc(var(--phone-screen-width) + (2 * (var(--phone-frame-size) + var(--phone-case-padding) + var(--phone-case-border-size))));
   display: grid;
-  gap: 10px;
-  width: min(calc(var(--phone-total-width) + 8px), 100vw);
+  gap: 0;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   max-width: 100%;
-  margin-inline: auto;
+  margin: 0;
+  padding: 0;
   font-family: var(--app-font-family);
   box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .phone-shell-wrap {
+    gap: 10px;
+    width: min(calc(var(--phone-total-width) + 8px), 100vw);
+    height: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
 }
 
 /* Outer metal mid-frame (stainless steel band) */
 .phone-case {
   position: relative;
-  width: var(--phone-total-width);
-  margin-inline: auto;
-  border-radius: var(--phone-case-radius);
-  padding: var(--phone-case-padding);
-  border: 0.5px solid rgba(0, 0, 0, 0.35);
-  background:
-    linear-gradient(175deg,
-      #a8adb2 0%,
-      #8a9096 6%,
-      #6a7078 16%,
-      #565c64 30%,
-      #7a8088 42%,
-      #9aa0a6 48%,
-      #6e747c 56%,
-      #585e66 68%,
-      #788088 80%,
-      #969ca4 90%,
-      #a0a6ac 100%);
-  box-shadow:
-    0 30px 60px rgba(60, 60, 60, 0.4),
-    0 10px 24px rgba(80, 80, 80, 0.25),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.65),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
-    inset 1.5px 0 0 rgba(255, 255, 255, 0.4),
-    inset -1px 0 0 rgba(0, 0, 0, 0.18);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 /* Inner black bezel */
 .phone-frame {
   position: relative;
-  border-radius: var(--phone-frame-radius);
-  padding: var(--phone-frame-size);
-  background: #0c0c0c;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-/* Left side buttons — silent switch */
-.phone-case::before {
-  content: "";
-  position: absolute;
-  left: -2.5px;
-  top: 155px;
-  width: 3px;
-  height: 22px;
-  border-radius: 2px 0 0 2px;
-  background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-    -1px 0 3px rgba(0, 0, 0, 0.15);
+@media (min-width: 768px) {
+  .phone-case {
+    width: var(--phone-total-width);
+    height: auto;
+    margin-inline: auto;
+    border-radius: var(--phone-case-radius);
+    padding: var(--phone-case-padding);
+    border: 0.5px solid rgba(0, 0, 0, 0.35);
+    background:
+      linear-gradient(175deg,
+        #a8adb2 0%,
+        #8a9096 6%,
+        #6a7078 16%,
+        #565c64 30%,
+        #7a8088 42%,
+        #9aa0a6 48%,
+        #6e747c 56%,
+        #585e66 68%,
+        #788088 80%,
+        #969ca4 90%,
+        #a0a6ac 100%);
+    box-shadow:
+      0 30px 60px rgba(60, 60, 60, 0.4),
+      0 10px 24px rgba(80, 80, 80, 0.25),
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+      inset 1.5px 0 0 rgba(255, 255, 255, 0.4),
+      inset -1px 0 0 rgba(0, 0, 0, 0.18);
+  }
+
+  .phone-frame {
+    width: auto;
+    height: auto;
+    border-radius: var(--phone-frame-radius);
+    padding: var(--phone-frame-size);
+    background: #0c0c0c;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+  }
 }
 
-/* Left side — volume buttons */
-.phone-frame::before {
-  content: "";
-  position: absolute;
-  left: -5.5px;
-  top: 200px;
-  width: 3px;
-  height: 32px;
-  border-radius: 2px 0 0 2px;
-  background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-    -1px 0 3px rgba(0, 0, 0, 0.15),
-    0 42px 0 0 #b8bcc0;
-}
+@media (min-width: 768px) {
+  /* Left side buttons — silent switch */
+  .phone-case::before {
+    content: "";
+    position: absolute;
+    left: -2.5px;
+    top: 155px;
+    width: 3px;
+    height: 22px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      -1px 0 3px rgba(0, 0, 0, 0.15);
+  }
 
-/* Left side — volume down */
-.phone-frame::after {
-  content: "";
-  position: absolute;
-  left: -5.5px;
-  top: 244px;
-  width: 3px;
-  height: 32px;
-  border-radius: 2px 0 0 2px;
-  background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-    -1px 0 3px rgba(0, 0, 0, 0.15);
-}
+  /* Left side — volume buttons */
+  .phone-frame::before {
+    content: "";
+    position: absolute;
+    left: -5.5px;
+    top: 200px;
+    width: 3px;
+    height: 32px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      -1px 0 3px rgba(0, 0, 0, 0.15),
+      0 42px 0 0 #b8bcc0;
+  }
 
-/* Right side — power/side button */
-.phone-case::after {
-  content: "";
-  position: absolute;
-  right: -2.5px;
-  top: 218px;
-  width: 3px;
-  height: 56px;
-  border-radius: 0 2px 2px 0;
-  background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-    1px 0 3px rgba(0, 0, 0, 0.15);
-  z-index: 1;
+  /* Left side — volume down */
+  .phone-frame::after {
+    content: "";
+    position: absolute;
+    left: -5.5px;
+    top: 244px;
+    width: 3px;
+    height: 32px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      -1px 0 3px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Right side — power/side button */
+  .phone-case::after {
+    content: "";
+    position: absolute;
+    right: -2.5px;
+    top: 218px;
+    width: 3px;
+    height: 56px;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(90deg, #6e747a, #8e949a, #6e747a);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      1px 0 3px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
 }
 
 /* ── Phone screen ── */
 
 .phone-shell {
   position: relative;
-  width: min(var(--phone-screen-width), 100vw);
-  height: min(var(--phone-screen-height), 100dvh);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   max-width: 100%;
   max-height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: var(--phone-screen-radius);
+  border-radius: 0;
   background: #ffffff;
   overflow: hidden;
-  padding: 12px;
+  padding: env(safe-area-inset-top, 12px) env(safe-area-inset-right, 12px) env(safe-area-inset-bottom, 12px) env(safe-area-inset-left, 12px);
   isolation: isolate;
+}
+
+@media (min-width: 768px) {
+  .phone-shell {
+    width: min(var(--phone-screen-width), 100vw);
+    height: min(var(--phone-screen-height), 100dvh);
+    border-radius: var(--phone-screen-radius);
+    padding: 12px;
+  }
 }
 
 .phone-shell::before {
