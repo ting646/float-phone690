@@ -115,11 +115,14 @@ export function applyDeviceCompatibilitySettings(
   } else if ((window.matchMedia("(hover: none) and (pointer: coarse)").matches
     || (window.matchMedia("(hover: none)").matches && navigator.maxTouchPoints > 0)
     || viewportWidth < 600)) {
-    console.warn("[compat] 移动端窄屏/触屏铺满档生效 viewport=" + viewportWidth + "x" + viewportHeight);
-    /* 移动端全屏铺满：自动将逻辑视口宽度和高度直接对齐真实视口，消除黑边与随意滑动。 */
+    console.warn("[compat] 真机全屏铺满无外壳档生效 viewport=" + viewportWidth + "x" + viewportHeight);
+    /* 真机全屏铺满：宽度和高度直接对齐真实视口，并强制隐藏手机外壳与圆角，实现直角全面屏效果。 */
     root.style.setProperty("--phone-screen-width", viewportWidth + "px");
     root.style.setProperty("--phone-screen-height", viewportHeight + "px");
     root.style.setProperty("--compat-layout-scale", "1");
+    if (typeof document !== "undefined") {
+      document.documentElement.setAttribute("data-hide-case", "1");
+    }
   } else if (Math.abs(userScale - 1) > 0.001) {
     root.style.setProperty("--phone-screen-width", Math.round(viewportWidth / userScale) + "px");
     root.style.setProperty("--phone-screen-height", Math.round(viewportHeight / userScale) + "px");

@@ -246,12 +246,23 @@
 
 /* ── Hide case mode ── */
 
+html[data-hide-case="1"] .phone-shell-wrap,
 .phone-shell-wrap[data-hide-case="1"] {
   --phone-case-padding: 0px;
   --phone-case-border-size: 0px;
   --phone-frame-size: 0px;
-  --phone-frame-radius: var(--phone-screen-radius);
-  --phone-case-radius: var(--phone-screen-radius);
+  --phone-frame-radius: 0px;
+  --phone-case-radius: 0px;
+}
+
+html[data-hide-case="1"] .phone-shell,
+.phone-shell-wrap[data-hide-case="1"] .phone-shell {
+  border-radius: 0px !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
 }
 
 .phone-shell-wrap[data-hide-case="1"] .phone-case {
