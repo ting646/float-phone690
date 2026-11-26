@@ -15,14 +15,37 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
-  .phone-shell-wrap {
-    gap: 10px;
-    width: min(calc(var(--phone-total-width) + 8px), 100vw);
-    height: auto;
-    margin-inline: auto;
-    padding: 0;
-  }
+/* 完美撑满：在任何手机/平板/电脑上都 100% 全屏铺满，不留黑边，同时保留应用内部标准边距不被压缩变形 */
+.phone-shell-wrap {
+  width: 100vw !important;
+  width: 100dvw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.phone-case {
+  width: 100vw !important;
+  width: 100dvw !important;
+  height: 100vh !important;
+  height: 100dvw !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.phone-frame {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Outer metal mid-frame (stainless steel band) */
