@@ -1277,16 +1277,14 @@ private fun deleteCachedSharedVideoInternal(cacheId: String): Boolean {
                 val scheme = url.scheme ?: return false
                 // 站内导航留在壳里；顶层 http(s) 外链和自定义协议交给系统
                 if (scheme == "http" || scheme == "https") {
-                    if (url.host == Uri.parse(SITE_URL).host) return false
-                    // 强制指定使用 Chrome 浏览器打开外部链接
+                    // 如果目标网址与主站点属于同一主域名（如同域重定向、子路径或登录鉴权），绝对留在 WebView 内，禁止外跳浏览器！
+                    val targetHost = url.host ?: ""
+                    val siteHost = Uri.parse(SITE_URL).host ?: ""
+                    if (targetHost.equals(siteHost, ignoreCase = true) || targetHost.endsWith(".$siteHost", ignoreCase = true) || siteHost.endsWith(".$targetHost", ignoreCase = true)) {
+                        return false
+                    }
+                    // 只有真正的外部独立外链才交由系统浏览器打开
                     return runCatching {
-                        val intent = Intent(Intent.ACTION_VIEW, url).apply {
-                            setPackage("com.android.chrome")
-                        }
-                        startActivity(intent)
-                        true
-                    }.recover {
-                        // 如果用户手机未安装 Chrome 或被拦截，则回退到系统默认浏览器
                         startActivity(Intent(Intent.ACTION_VIEW, url))
                         true
                     }.getOrDefault(true)
