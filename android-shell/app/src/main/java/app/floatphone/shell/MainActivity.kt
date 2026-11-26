@@ -1278,8 +1278,17 @@ private fun deleteCachedSharedVideoInternal(cacheId: String): Boolean {
                 // 站内导航留在壳里；顶层 http(s) 外链和自定义协议交给系统
                 if (scheme == "http" || scheme == "https") {
                     if (url.host == Uri.parse(SITE_URL).host) return false
+                    // 强制指定使用 Chrome 浏览器打开外部链接
                     return runCatching {
-                        startActivity(Intent(Intent.ACTION_VIEW, url)); true
+                        val intent = Intent(Intent.ACTION_VIEW, url).apply {
+                            setPackage("com.android.chrome")
+                        }
+                        startActivity(intent)
+                        true
+                    }.recover {
+                        // 如果用户手机未安装 Chrome 或被拦截，则回退到系统默认浏览器
+                        startActivity(Intent(Intent.ACTION_VIEW, url))
+                        true
                     }.getOrDefault(true)
                 }
                 return runCatching {
